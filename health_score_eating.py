@@ -52,27 +52,19 @@ def get_health_scores():
         zip = rest[13]
         zips[zip].append(rest)
 
-    rest_list = []
+    eateries = {}
     for rest in sample(zips[str(zip_code)], 10):
-        rest_list.append(rest_name(rest).title())
+        name = rest_name(rest).title()
         risk = get_rating(rest)
+        eateries[name] = {'name': name, 'risk': risk}
 
-    return render_template('health_score.html', restaurants = rest_list, zippy = zip_code)
+    return render_template('health_score.html', eateries = eateries, zippy = zip_code)
     
 def rest_name(name): 
     return name[9]
 
-def get_rating(r):
-    return r[-1]
-
-#get rid of duplicate rows
-
-
-#get the health rating
-ratings = {}
-
-#organize by zip code
-
+def get_rating(rating):
+    return rating[-1]
 
 if __name__ == "__main__":
     app.run(debug=True) 

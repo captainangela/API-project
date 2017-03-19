@@ -14,8 +14,11 @@
         		</tr>
         	</head>
         	<tbody>
-				{% for rest in restaurants %}
-                <tr><td>{{ rest }}</td></tr>
+				{% for e in eateries.values() %}
+                <tr>
+                    <td>{{ e['name'] }}</td>
+                    <td>{{ e['risk'] }}</td>
+                </tr>
             	{% endfor %}
             </tbody>
     </body>
