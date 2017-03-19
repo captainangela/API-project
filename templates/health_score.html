@@ -1,0 +1,22 @@
+<html>
+    <head>
+    <title>Scores</title>   
+    </head>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+	<body>
+    	<h1>Here are 10 places to eat in {{ zippy }}</h1>
+    	<p>
+        <table>
+        	<head>
+        		<tr>
+        			<th>Restaurant Name</th>
+        			<th>Level of Risk</th>
+        		</tr>
+        	</head>
+        	<tbody>
+				{% for rest in restaurants %}
+                <tr><td>{{ rest }}</td></tr>
+            	{% endfor %}
+            </tbody>
+    </body>
+</html>
