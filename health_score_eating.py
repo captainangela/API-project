@@ -6,42 +6,18 @@ from random import sample
 
 app = Flask(__name__)
 
-apiUrl = "http://data.sfgov.org/api/views/pyih-qa8i/rows.json?"
-response = urlopen(apiUrl)
-json_obj = load(response)
-data = json_obj['data']
-
 @app.route("/")
 def index():
-    return """
-    <html>
-      <body>
-        <h1>Welcome!</h1>
-        Click here to check for restaurants!
-      </body>
-    </html>
-    """    
+    return render_template('home_page.html')  
 
 @app.route('/health')
 def enter_zip_code():    
-    return """
-    <html>
-    <head>
-    <title>Health Scores</title>
-    </head>
-    <body>
-        <form action='scores'>
-            What zip code will you be dining in? 
-            <input type ='text' name ='zip_code'>
-            <input type ='submit'>
-        </form>
-    </body>
-    </html> 
-    """
+    return render_template('landing_page.html')
 
 @app.route('/scores')
 def get_health_scores():
     zip_code = request.args.get('zip_code')
+    data = get_restaurant_data()
     
     restaurants = {}
     for row in data:
@@ -59,7 +35,15 @@ def get_health_scores():
         eateries[name] = {'name': name, 'risk': risk}
 
     return render_template('health_score.html', eateries = eateries, zippy = zip_code)
-    
+
+
+def get_restaurant_data():
+    apiUrl = "http://data.sfgov.org/api/views/pyih-qa8i/rows.json?"
+    response = urlopen(apiUrl)
+    json_obj = load(response)
+    data = json_obj['data']
+    return data
+
 def rest_name(name): 
     return name[9]
 

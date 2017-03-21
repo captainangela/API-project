@@ -1,9 +1,9 @@
 <html>
     <head>
-    <title>Scores</title>   
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/health.css') }}">
+        <title>Scores</title>   
     </head>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-	<body>
+    <body>
     	<h1>Here are 10 places to eat in {{ zippy }}</h1>
     	<p>
         <table>
@@ -21,5 +21,7 @@
                 </tr>
             	{% endfor %}
             </tbody>
+        </table>
+        <p><a href='/health'>Click here</a> if you would like to enter another zip code!
     </body>
 </html>
